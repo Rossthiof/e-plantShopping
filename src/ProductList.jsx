@@ -6,7 +6,7 @@ import { addItem } from './CartSlice';
 
 function ProductList({ onHomeClick }) {
     const [showCart, setShowCart] = useState(false);
-    const [showPlants, setShowPlants] = useState(false); 
+    const [showCart, setShowCart] = useState(false);
     const [addedToCart, setAddedToCart] = useState({}); // ✅ Task 1: state für Cart
     const dispatch = useDispatch();
 
@@ -338,8 +338,9 @@ function ProductList({ onHomeClick }) {
                                         <img src={plant.image} alt={plant.name} />
                                         <p>{plant.description}</p>
                                         <p>{plant.cost}</p>
-                                        <button 
-                                            onClick={() => handleAddToCart(plant)} 
+                                        <button
+                                            className={`product-button ${addedToCart[plant.name] ? 'added-to-cart' : ''}`}
+                                            onClick={() => handleAddToCart(plant)}
                                             disabled={addedToCart[plant.name]}
                                         >
                                             {addedToCart[plant.name] ? "Added to Cart" : "Add to Cart"}

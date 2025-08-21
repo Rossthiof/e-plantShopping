@@ -1,46 +1,33 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
+
+const initialState = {
+  cartItems: []
+};
 
 const cartSlice = createSlice({
-  name: "cart",
-  initialState: {
-    items: [], // Array der Produkte im Warenkorb
-  },
+  name: 'cart',
+  initialState,
   reducers: {
-    // ✅ Produkt hinzufügen
     addItem: (state, action) => {
-      const { name, image, price } = action.payload; // Produktdetails extrahieren
-      const existingItem = state.items.find((item) => item.name === name);
-
+      const existingItem = state.cartItems.find(item => item.name === action.payload.name);
       if (existingItem) {
-        // Wenn das Produkt schon im Warenkorb ist → Menge +1
-        existingItem.quantity++;
+        existingItem.quantity += 1;
       } else {
-        // Neues Produkt ins Array pushen
-        state.items.push({ name, image, price, quantity: 1 });
+        state.cartItems.push({ ...action.payload, quantity: 1 });
       }
     },
-
-    // ✅ Produkt entfernen
     removeItem: (state, action) => {
-      state.items = state.items.filter(
-        (item) => item.name !== action.payload
-      );
+      state.cartItems = state.cartItems.filter(item => item.name !== action.payload);
     },
-
-    // ✅ Produktanzahl aktualisieren
     updateQuantity: (state, action) => {
-      const { name, quantity } = action.payload;
-      const itemToUpdate = state.items.find((item) => item.name === name);
-
-      if (itemToUpdate) {
-        itemToUpdate.quantity = quantity;
-      }
+      const item = state.cartItems.find(i => i.name === action.payload.name);
+      if (item) item.quantity = action.payload.quantity;
     },
-  },
+    clearCart: (state) => {
+      state.cartItems = [];
+    }
+  }
 });
 
-// Actions exportieren
-export const { addItem, removeItem, updateQuantity } = cartSlice.actions;
-
-// Reducer exportieren für store.js
+export const { addItem, removeItem, updateQuantity, clearCart } = cartSlice.actions;
 export default cartSlice.reducer;
