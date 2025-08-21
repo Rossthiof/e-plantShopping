@@ -3,11 +3,14 @@ import './ProductList.css'
 import CartItem from './CartItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from './CartSlice';
+import { useNavigate } from 'react-router-dom';
 
 function ProductList({ onHomeClick }) {
     const [showCart, setShowCart] = useState(false);
     const [showPlants, setShowPlants] = useState(false);
     const [addedToCart, setAddedToCart] = useState({});
+    const navigate = useNavigate(); // <-- HIER
+
 
     const dispatch = useDispatch();
 
@@ -256,8 +259,9 @@ function ProductList({ onHomeClick }) {
 
     const handleCartClick = (e) => {
         e.preventDefault();
-        setShowCart(true); 
+        navigate('/cart'); 
     };
+    
     const handlePlantsClick = (e) => {
         e.preventDefault();
         setShowPlants(true); 

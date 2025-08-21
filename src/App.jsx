@@ -31,7 +31,7 @@ function App() {
           } 
         />
         <Route path="/plants" element={<ProductList />} />
-        <Route path="/cart" element={<CartPage />} />
+        <Route path="/cart" element={<CartItem />} />
       </Routes>
     </Router>
   );
