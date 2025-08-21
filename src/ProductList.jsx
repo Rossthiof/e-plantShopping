@@ -6,8 +6,9 @@ import { addItem } from './CartSlice';
 
 function ProductList({ onHomeClick }) {
     const [showCart, setShowCart] = useState(false);
-    const [showCart, setShowCart] = useState(false);
-    const [addedToCart, setAddedToCart] = useState({}); // ✅ Task 1: state für Cart
+    const [showPlants, setShowPlants] = useState(false);
+    const [addedToCart, setAddedToCart] = useState({});
+
     const dispatch = useDispatch();
 
     // ✅ Task 4: Zugriff auf Redux store (cartItems)
